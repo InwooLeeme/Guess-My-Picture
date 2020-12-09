@@ -4,7 +4,8 @@
   "description": "Realtime Drawing game built with SocketIO, GULP and Node",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node src/server.js --delay 2"
+    "start": "nodemon --exec babel-node src/server.js --delay 2",
+    "style":"gulp styles"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,10 @@
   "homepage": "https://github.com/InwooLeeme/Guess-My-Picture#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "gulp": "^4.0.2",
+    "gulp-sass": "^4.1.0",
     "morgan": "^1.10.0",
+    "node-sass": "^5.0.0",
     "pug": "^3.0.0",
     "socket.io": "^3.0.3"
   },
