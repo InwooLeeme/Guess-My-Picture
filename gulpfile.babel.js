@@ -1,4 +1,4 @@
-import gulp, { dest } from "gulp";
+import gulp from "gulp";
 import sass from "gulp-sass";
 import autoprefixer from "gulp-autoprefixer";
 import csso from "gulp-csso";
@@ -30,7 +30,7 @@ function styles() {
     .pipe(sass())
     .pipe(
       autoprefixer({
-        browsers:["last 2 versions"],
+        browsers: ["last 2 versions"],
         cascade: false,
       })
     )
@@ -58,5 +58,7 @@ function watchFiles() {
 }
 
 const dev = gulp.series(clear, styles, js, watchFiles);
+
+export const build = gulp.series(clear, styles, js);
 
 export default dev;

@@ -4,8 +4,8 @@
   "description": "Realtime Drawing game built with SocketIO, GULP and Node",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node src/server.js --delay 2 --ignore assets/ --ignore src/static",
-    "style": "gulp"
+    "dev:server": "nodemon --exec babel-node src/server.js --delay 2 --ignore assets/ --ignore src/static",
+    "dev:assets": "gulp"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,11 @@
     "url": "https://github.com/InwooLeeme/Guess-My-Picture/issues"
   },
   "homepage": "https://github.com/InwooLeeme/Guess-My-Picture#readme",
+  "browserslist": [
+    "defaults",
+    "not IE 11",
+    "maintained node versions"
+  ],
   "dependencies": {
     "babelify": "^10.0.0",
     "del": "^6.0.0",
