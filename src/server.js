@@ -1,3 +1,6 @@
+// server.js : Backend
+// Index.js : frontend
+
 import { join } from "path";
 import express from "express";
 import socketIO from "socket.io";
