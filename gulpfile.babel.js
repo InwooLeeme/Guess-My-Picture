@@ -24,7 +24,7 @@ const path = {
 // 삭제를 위한 함수
 const clear = () => del(["src/static"]);
 
-function styles() {
+const styles = () => {
   return gulp
     .src(path.styles.src)
     .pipe(sass())
@@ -36,11 +36,11 @@ function styles() {
     )
     .pipe(csso()) // minify (압축)함.
     .pipe(gulp.dest(path.styles.dest)); // path.style.dest => src폴더 안의 static안의 styles안에 저장함.
-}
+};
 
 const js = () =>
   gulp
-    .src(path.js.src)
+    .src(path.js.src, { allowEmpty: true })
     .pipe(
       browserify({
         transform: [
@@ -52,10 +52,10 @@ const js = () =>
     )
     .pipe(gulp.dest(path.js.dest));
 
-function watchFiles() {
+const watchFiles = () => {
   gulp.watch(path.styles.watch, styles);
   gulp.watch(path.js.watch, js);
-}
+};
 
 const dev = gulp.series(clear, styles, js, watchFiles);
 

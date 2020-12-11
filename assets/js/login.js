@@ -1,3 +1,5 @@
+const { initSocket } = require("./sockets");
+
 const body = document.querySelector("body");
 const loginForm = document.getElementById("jsLogin");
 const LOGGED_OUT = "loggedOut";
@@ -8,8 +10,9 @@ const nickname = localStorage.getItem(NICKNAME);
 // 로그인 기능 함수
 const logIn = (nickname) => {
   // socket은 현재 local 변수
-  window.socket = io("/"); // 연결 => window.socket : 모든 파일에서 socket을 사용 가능
-  window.socket.emit(window.events.setNickname, { nickname });
+  const socket = io("/"); // 연결 => window.socket : 모든 파일에서 socket을 사용 가능
+  socket.emit(window.events.setNickname, { nickname });
+  initSocket(socket); // 로그인 시점에 소켓 시작
 };
 
 if (nickname === null) {

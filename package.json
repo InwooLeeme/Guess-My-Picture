@@ -4,7 +4,7 @@
   "description": "Realtime Drawing game built with SocketIO, GULP and Node",
   "main": "index.js",
   "scripts": {
-    "dev:server": "nodemon --exec babel-node src/server.js --delay 2 --ignore src/static",
+    "dev:server": "nodemon --exec babel-node src/server.js --delay 2 --ignore src/static --ignore assets/",
     "dev:assets": "gulp"
   },
   "repository": {

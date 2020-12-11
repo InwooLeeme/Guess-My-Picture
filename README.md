@@ -9,5 +9,5 @@ Realtime Drawing game built with SocketIO, GULP and Node
 - [x] Static
 - [x] SocketIO
 - [x] Login
-- [ ] Alarm
+- [ ] Notifications(Alarms)
 - [x] Styling
