@@ -17,7 +17,7 @@ const path = {
   js: {
     src: "assets/js/main.js",
     dest: "src/static/js",
-    watch: " assets/js/**/*.js",
+    watch: "assets/js/**/*.js",
   },
 };
 
@@ -30,7 +30,6 @@ const styles = () => {
     .pipe(sass())
     .pipe(
       autoprefixer({
-        browsers: ["last 2 versions"],
         cascade: false,
       })
     )
@@ -57,8 +56,8 @@ const watchFiles = () => {
   gulp.watch(path.js.watch, js);
 };
 
-const dev = gulp.series(clear, styles, js, watchFiles);
+const dev = gulp.series([clear, styles, js, watchFiles]);
 
-export const build = gulp.series(clear, styles, js);
+export const build = gulp.series([clear, styles, js]);
 
 export default dev;
