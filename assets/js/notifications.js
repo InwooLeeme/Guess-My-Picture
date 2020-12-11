@@ -1,13 +1,14 @@
 // User Notifications function page
 
-const notifications = document.getElementById("jsNotifications");
+const body = document.getElementById("body");
 
 // connection
 const fireNotification = (text, color) => {
   const notification = document.createElement("div");
   notification.innerText = text;
   notification.style.backgroundColor = color;
-  notifications.appendChild(notification);
+  notification.className = "notification";
+  body.appendChild(notification);
 };
 
 export const handleNewUser = ({ nickname }) =>
