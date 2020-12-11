@@ -6,12 +6,13 @@ import express from "express";
 import socketIO from "socket.io";
 import logger from "morgan";
 import socketController from "./socketController";
+import events from "./events";
 
 const app = express();
 const PORT = 4000;
 
 const handleGet = (req, res) => {
-  res.render("home");
+  res.render("home", { events : JSON.stringify(events)});
 };
 
 const handleListening = () => {

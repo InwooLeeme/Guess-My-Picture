@@ -8,3 +8,6 @@ Realtime Drawing game built with SocketIO, GULP and Node
 - [x] Pug
 - [x] Static
 - [x] SocketIO
+- [x] Login
+- [ ] Alarm
+- [x] Styling

@@ -8,8 +8,8 @@ const nickname = localStorage.getItem(NICKNAME);
 // 로그인 기능 함수
 const logIn = (nickname) => {
   // socket은 현재 local 변수
-  const socket = io("/"); // 연결
-  socket.emit("setNickname", { nickname });
+  window.socket = io("/"); // 연결 => window.socket : 모든 파일에서 socket을 사용 가능
+  window.socket.emit(window.events.setNickname, { nickname });
 };
 
 if (nickname === null) {
