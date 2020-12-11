@@ -1,3 +1,3 @@
 import "./login.js";
-import "./notifications";
+import "./notifications.js";
 import "./sockets";

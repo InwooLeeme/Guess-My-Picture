@@ -1,5 +1,5 @@
 // Socket 관리 페이지
-import { handleNewUser } from "./notifications";
+import { handleDisconnected, handleNewUser } from "./notifications";
 
 let socket = null;
 
@@ -13,4 +13,5 @@ export const initSocket = (aSocket) => {
   updateSocket(aSocket);
   // eslint-disable-next-line no-undef
   aSocket.on(events.newUser, handleNewUser);
+  aSocket.on(events.disconnected, handleDisconnected)
 };
