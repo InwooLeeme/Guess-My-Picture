@@ -12,7 +12,7 @@ const app = express();
 const PORT = 4000;
 
 const handleGet = (req, res) => {
-  res.render("home", { events : JSON.stringify(events)});
+  res.render("home", { events: JSON.stringify(events) });
 };
 
 const handleListening = () => {
@@ -29,4 +29,4 @@ const server = app.listen(PORT, handleListening);
 
 const io = socketIO(server);
 
-io.on("connection", socket => socketController(socket));
+io.on("connection", (socket) => socketController(socket));
