@@ -18,9 +18,7 @@
   },
   "homepage": "https://github.com/InwooLeeme/Guess-My-Picture#readme",
   "browserslist": [
-    "defaults",
-    "not IE 11",
-    "maintained node versions"
+    "last 2 versions"
   ],
   "dependencies": {
     "babelify": "^10.0.0",
@@ -34,12 +32,13 @@
     "morgan": "^1.10.0",
     "node-sass": "^5.0.0",
     "pug": "^3.0.0",
-    "socket.io": "^3.0.3"
+    "socket.io": "^3.0.3",
+    "uglifyify": "^5.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9",
-    "@babel/node": "^7.12.6",
-    "@babel/preset-env": "^7.12.7",
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/preset-env": "^7.12.10",
     "eslint": "^7.15.0",
     "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-prettier": "^3.2.0",

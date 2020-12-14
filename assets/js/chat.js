@@ -1,5 +1,5 @@
-// 채팅에 관한 함수를 관리한는 파일
 import { getSocket } from "./sockets";
+// 채팅에 관한 함수를 관리한는 파일
 
 const message = document.getElementById("jsMessage");
 const sendMsg = document.getElementById("jsSendMsg");

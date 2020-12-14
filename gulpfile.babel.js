@@ -46,6 +46,7 @@ const js = () =>
         transform: [
           babel.configure({
             presets: ["@babel/preset-env"],
+            extensions: [".js"],
           }),
         ],
       })
