@@ -1,4 +1,7 @@
-import { handleNewUser } from "./notifications";
+// frontend part
+// Client part
+
+import { handleDisconnect, handleNewUser } from "./notifications";
 
 let socket = null;
 
@@ -14,4 +17,7 @@ export const initSockets = (aSocket) => {
   updateScoket(socket);
   // 새로운 유저가 들어오는 이벤트인 newUser를 항상 듣고있음
   aSocket.on(events.newUser, handleNewUser);
+  // 연결이 끝났을때의 이벤트를 항상 듣고 있음
+  aSocket.on(events.disconnected, handleDisconnect);
+
 };
