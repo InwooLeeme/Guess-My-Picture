@@ -1,4 +1,5 @@
 // 채팅에 관한 함수를 관리한는 파일
+import { getSocket } from "./sockets";
 
 const message = document.getElementById("jsMessage");
 const sendMsg = document.getElementById("jsSendMsg");
@@ -18,10 +19,13 @@ const handleSendMsg = (event) => {
   event.preventDefault();
   const input = sendMsg.querySelector("input");
   const { value } = input;
-  //console.log(value);
+  getSocket().emit(window.events.sendMsg, { message: value });
   input.value = "";
   appendMsg(value);
 };
+
+export const handleNewMsg = ({ message, nickname }) =>
+  appendMsg(message, nickname);
 
 if (sendMsg) {
   sendMsg.addEventListener("submit", handleSendMsg);
