@@ -19,5 +19,4 @@ export const initSockets = (aSocket) => {
   aSocket.on(events.newUser, handleNewUser);
   // 연결이 끝났을때의 이벤트를 항상 듣고 있음
   aSocket.on(events.disconnected, handleDisconnect);
-
 };

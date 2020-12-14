@@ -1,5 +1,5 @@
 // User notifications file
-const notifications = document.getElementById("jsNotifications");
+const body = document.querySelector("body");
 
 // 알림 호출 함수
 const fireNotification = (text, color) => {
@@ -7,7 +7,7 @@ const fireNotification = (text, color) => {
   notification.innerText = text;
   notification.style.backgroundColor = color;
   notification.className = "notification";
-  notifications.appendChild(notification);
+  body.appendChild(notification);
 };
 
 // 새로 들어온 유저의 닉네임을 호출
