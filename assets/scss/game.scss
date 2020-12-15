@@ -1,0 +1,75 @@
+.gameContainer {
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+  justify-content: center;
+  .canvas,
+  .chatMessages {
+    background-color: white;
+    height: 80vh;
+    border-radius: 20px;
+    box-shadow: 0 3px 36px rgba(23, 55, 87, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+  }
+  .main {
+    margin-right: 200px;
+    #jsCanvas {
+      width: 700px;
+      height: 700px;
+    }
+    .controls {
+      width: 90%;
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      button {
+        width: 4em;
+        height: 2em;
+        text-align: center;
+        margin: 10px;
+        box-shadow: 0 3px 36px rgba(23, 55, 87, 0.1),
+          0 5px 15px rgba(0, 0, 0, 0.07);
+      }
+    }
+    .colors {
+      width: 90%;
+      height: 60px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      .jsColor {
+        width: 3em;
+        height: 3em;
+        border-radius: 50%;
+        margin: 1em 1px;
+      }
+      .color:nth-child(1) {
+        background-color: $black;
+      }
+      .color:nth-child(2) {
+        background-color: $greyColor;
+      }
+      .color:nth-child(3) {
+        background-color: $red;
+      }
+      .color:nth-child(4) {
+        background-color: $orange;
+      }
+      .color:nth-child(5) {
+        background-color: $yellow;
+      }
+      .color:nth-child(6) {
+        background-color: $green;
+      }
+      .color:nth-child(7) {
+        background-color: $lightBlue;
+      }
+      .color:nth-child(8) {
+        background-color: $darkBlue;
+      }
+      .color:nth-child(9) {
+        background-color: $purple;
+      }
+    }
+  }
+}
