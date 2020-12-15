@@ -3,7 +3,12 @@
 
 import { handleNewMsg } from "./chat";
 import { handleDisconnect, handleNewUser } from "./notifications";
-import { handleBeganPath, handleStrokedPath } from "./paint";
+import {
+  handleBeganPath,
+  handleClear,
+  handleFilled,
+  handleStrokedPath,
+} from "./paint";
 
 let socket = null;
 
@@ -27,4 +32,8 @@ export const initSockets = (aSocket) => {
   aSocket.on(events.beganPath, handleBeganPath);
   // strokedPath 이벤트 수신
   aSocket.on(events.strokedPath, handleStrokedPath);
+  // filled event 수신
+  aSocket.on(events.filled, handleFilled);
+  // cleared event 수신 => handleClear 호출
+  aSocket.on(events.cleared, handleClear);
 };

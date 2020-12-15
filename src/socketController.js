@@ -23,9 +23,19 @@ const socketController = (socket) => {
     broadcast(events.beganPath, { x, y });
   });
   // strokePath 이벤트 수신
-  socket.on(events.strokePath, ({ x, y }) => {
+  socket.on(events.strokePath, ({ x, y, color }) => {
     // 그려진 선을 다른 유저들에게 broadcast 해줌
-    broadcast(events.strokedPath, { x, y });
+    broadcast(events.strokedPath, { x, y, color });
+  });
+  // fill event를 수신
+  socket.on(events.fill, ({ color }) => {
+    // filled 이벤트를 broadcast => sockets.js파일로 송신
+    broadcast(events.filled, { color });
+  });
+  // clear 이벤트 수신
+  socket.on(events.clear, () => {
+    // cleared event를 송신 (broadcast로)
+    broadcast(events.cleared);
   });
 };
 
