@@ -17,5 +17,5 @@ Realtime Drawing game built with SocketIO, GULP and Node
 - [x] Make a canvas.
 - [x] Make a drawing line function.
 - [x] Clear the canvas.
-- [ ] Select line color function.
-- [x] Fill the canvas.
+- [x] Select line color function.
+- [] Fill the canvas.

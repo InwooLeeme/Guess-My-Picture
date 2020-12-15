@@ -3,6 +3,7 @@
 const canvas = document.getElementById("jsCanvas");
 const fillBtn = document.querySelector("#jsMode:nth-child(1)");
 const clearBtn = document.querySelector("#jsMode:nth-child(2)");
+const colors = document.getElementsByClassName("color");
 const ctx = canvas.getContext("2d");
 
 const CANVAS_SIZE = 700;
@@ -12,6 +13,7 @@ canvas.height = CANVAS_SIZE;
 ctx.lineWidth = 2.5;
 
 let pressed = false;
+let filling = false;
 
 function handleMove(event) {
   let x = event.offsetX;
@@ -37,8 +39,19 @@ function clearCanvas() {
   ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 }
 function fillCanvas() {
-  ctx.fillStyle = "black";
-  ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+  if (!filling) {
+  } else {
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+  }
+}
+
+function selectColor(event) {
+  const targeting = event.target;
+  const color = getComputedStyle(targeting);
+  const getBackgroundColor = color.backgroundColor;
+  ctx.strokeStyle = getBackgroundColor;
+  ctx.fillStyle = getBackgroundColor;
 }
 
 if (canvas) {
@@ -49,3 +62,7 @@ if (canvas) {
   clearBtn.addEventListener("click", clearCanvas);
   fillBtn.addEventListener("click", fillCanvas);
 }
+
+Array.from(colors).forEach((color) => {
+  color.addEventListener("click", selectColor);
+});
