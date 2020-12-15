@@ -9,7 +9,6 @@ const CANVAS_SIZE = 700;
 
 canvas.width = CANVAS_SIZE;
 canvas.height = CANVAS_SIZE;
-ctx.fillStyle = "white";
 ctx.lineWidth = 2.5;
 
 let pressed = false;
@@ -37,6 +36,10 @@ function stopPainting() {
 function clearCanvas() {
   ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 }
+function fillCanvas() {
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+}
 
 if (canvas) {
   canvas.addEventListener("mousemove", handleMove);
@@ -44,4 +47,5 @@ if (canvas) {
   canvas.addEventListener("mouseup", stopPainting);
   canvas.addEventListener("mouseleave", stopPainting);
   clearBtn.addEventListener("click", clearCanvas);
+  fillBtn.addEventListener("click", fillCanvas);
 }
