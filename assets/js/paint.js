@@ -1,4 +1,5 @@
 // Painting game page
+// Front end
 import { getSocket } from "./sockets";
 const canvas = document.getElementById("jsCanvas");
 const fillBtn = document.querySelector("#jsMode:nth-child(1)");
@@ -31,12 +32,12 @@ function handleMove(event) {
   if (!pressed) {
     // 켄버스 위에서 마우스가 눌러졌을 때
     beginPath(x, y);
-    // 실시간으로 emit중
+    // 실시간으로 beginPath 이벤트 발생
     getSocket().emit(window.events.beginPath, { x, y });
   } else {
     // 캔버스 위에서 마우스 클릭을 멈췄을 때
     strokePath(x, y);
-    // 실시간으로 emit중
+    // 실시간으로 strokePath 이벤트 발생
     getSocket().emit(window.events.strokePath, { x, y });
   }
 }
@@ -76,4 +77,4 @@ Array.from(colors).forEach((color) => {
 });
 
 export const handleBeganPath = ({ x, y }) => beginPath(x, y);
-export const handleStrokedPath = ({x,y}) => strokePath(x, y);
+export const handleStrokedPath = ({ x, y }) => strokePath(x, y);

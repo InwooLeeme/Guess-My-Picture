@@ -12,7 +12,7 @@ Realtime Drawing game built with SocketIO, GULP and Node
 - [ ] Alarm
 - [x] Styling
 
-# Game To Dp
+# Game To Do
 
 - [x] Make a canvas.
 - [x] Make a drawing line function.

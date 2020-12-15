@@ -23,8 +23,8 @@ export const initSockets = (aSocket) => {
   aSocket.on(events.disconnected, handleDisconnect);
   // newMsg 이벤트를 듣는 중
   aSocket.on(events.newMsg, handleNewMsg);
-  //
+  // beganPath 이벤트 수신
   aSocket.on(events.beganPath, handleBeganPath);
-  //
+  // strokedPath 이벤트 수신
   aSocket.on(events.strokedPath, handleStrokedPath);
 };
