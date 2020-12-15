@@ -1,5 +1,5 @@
 // Painting game page
-
+import { getSocket } from "./sockets";
 const canvas = document.getElementById("jsCanvas");
 const fillBtn = document.querySelector("#jsMode:nth-child(1)");
 const clearBtn = document.querySelector("#jsMode:nth-child(2)");
@@ -13,19 +13,31 @@ canvas.height = CANVAS_SIZE;
 ctx.lineWidth = 2.5;
 
 let pressed = false;
-let filling = false;
+
+// 다른 함수에도 사용하기 위해서 함수화 하였음 (beginPath and strokedPath)
+const beginPath = (x, y) => {
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+};
+
+const strokePath = (x, y) => {
+  ctx.lineTo(x, y);
+  ctx.stroke();
+};
 
 function handleMove(event) {
   let x = event.offsetX;
   let y = event.offsetY;
   if (!pressed) {
     // 켄버스 위에서 마우스가 눌러졌을 때
-    ctx.beginPath();
-    ctx.moveTo(x, y);
+    beginPath(x, y);
+    // 실시간으로 emit중
+    getSocket().emit(window.events.beginPath, { x, y });
   } else {
     // 캔버스 위에서 마우스 클릭을 멈췄을 때
-    ctx.lineTo(x, y);
-    ctx.stroke();
+    strokePath(x, y);
+    // 실시간으로 emit중
+    getSocket().emit(window.events.strokePath, { x, y });
   }
 }
 
@@ -62,3 +74,6 @@ if (canvas) {
 Array.from(colors).forEach((color) => {
   color.addEventListener("click", selectColor);
 });
+
+export const handleBeganPath = ({ x, y }) => beginPath(x, y);
+export const handleStrokedPath = ({x,y}) => strokePath(x, y);

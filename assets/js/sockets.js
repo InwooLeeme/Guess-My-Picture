@@ -3,6 +3,7 @@
 
 import { handleNewMsg } from "./chat";
 import { handleDisconnect, handleNewUser } from "./notifications";
+import { handleBeganPath, handleStrokedPath } from "./paint";
 
 let socket = null;
 
@@ -22,4 +23,8 @@ export const initSockets = (aSocket) => {
   aSocket.on(events.disconnected, handleDisconnect);
   // newMsg 이벤트를 듣는 중
   aSocket.on(events.newMsg, handleNewMsg);
+  //
+  aSocket.on(events.beganPath, handleBeganPath);
+  //
+  aSocket.on(events.strokedPath, handleStrokedPath);
 };
