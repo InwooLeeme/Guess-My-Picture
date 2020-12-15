@@ -39,11 +39,7 @@ function clearCanvas() {
   ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 }
 function fillCanvas() {
-  if (!filling) {
-  } else {
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-  }
+  ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 }
 
 function selectColor(event) {
