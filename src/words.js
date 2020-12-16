@@ -92,4 +92,4 @@ const words = [
   "women",
 ];
 
-export const chooseWords = words[Math.floor(Math.random() * words.length)];
+export const chooseWords = () => words[Math.floor(Math.random() * words.length)];

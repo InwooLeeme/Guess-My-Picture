@@ -1,6 +1,8 @@
 // front end part
 // player에 관한 페이지
 
+import { disableCanvas, hideControls } from "./paint";
+
 const board = document.getElementById("jsPBoard");
 
 const addPlayers = (players) => {
@@ -14,3 +16,10 @@ const addPlayers = (players) => {
 };
 
 export const handlePlayerUpdate = ({ sockets }) => addPlayers(sockets);
+export const handleGameStarted = () => {
+  // disable canvas event
+  disableCanvas();
+  // hidden the canvas controls
+  hideControls();
+  console.log('start!');
+}

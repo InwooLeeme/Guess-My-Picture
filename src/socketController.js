@@ -1,6 +1,6 @@
 // Always listening event in this file.
 import events from "./events";
-import { chooseWord } from "./words";
+import { chooseWords } from "./words";
 
 let sockets = []; // 유저 닉네임,점수,id를 관리하는 배열
 let inProgress = false;
@@ -22,9 +22,13 @@ const socketController = (socket, io) => {
     if (inProgress === false) {
       inProgress = true;
       const painter = chooseLeader();
-      word = chooseWord();
+      word = chooseWords();
+      io.to(painter.id).emit(events.painterNotif, { word }); // painter로 지정된 사람에게만 메세지 전송
+      superBroadcast(events.gameStarted);
     }
   };
+
+const endGame = () => inProgress = false;
 
   socket.on(events.setNickname, ({ nickname }) => {
     socket.nickname = nickname;
@@ -32,12 +36,17 @@ const socketController = (socket, io) => {
     sockets.push({ id: socket.id, points: 0, nickname: nickname });
     broadcast(events.newUser, { nickname });
     sendPlayerUpdate();
-    startGame();
+    if(sockets.length === 2){
+      startGame();
+    };
   });
 
   socket.on(events.disconnect, () => {
     // disconnect한 유저를 sockets 배열에서 제거하는 기능
     sockets = sockets.filter((aSocket) => aSocket.id !== socket.id);
+    if(sockets.length === 1){
+      endGame();
+    }
     broadcast(events.disconnected, { nickname: socket.nickname });
     sendPlayerUpdate();
   });

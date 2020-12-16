@@ -16,6 +16,8 @@ const events = {
   clear: "clear",
   cleared: "cleared",
   playerUpdate: "playerUpdate",
+  gameStarted: "gameStarted",
+  painterNotif: "painterNotif",
 };
 
 export default events;

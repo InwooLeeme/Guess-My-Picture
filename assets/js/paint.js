@@ -2,6 +2,8 @@
 // Front end
 import { getSocket } from "./sockets";
 const canvas = document.getElementById("jsCanvas");
+const controls = document.getElementById("jsControls");
+const selectColors = document.getElementById('jsColors')
 const fillBtn = document.querySelector("#jsMode:nth-child(1)");
 const clearBtn = document.querySelector("#jsMode:nth-child(2)");
 const colors = document.getElementsByClassName("color");
@@ -92,14 +94,6 @@ function selectColor(event) {
   ctx.fillStyle = getBackgroundColor;
 }
 
-if (canvas) {
-  canvas.addEventListener("mousemove", handleMove);
-  canvas.addEventListener("mousedown", startPainting);
-  canvas.addEventListener("mouseup", stopPainting);
-  canvas.addEventListener("mouseleave", stopPainting);
-  clearBtn.addEventListener("click", clearTheCanvas);
-  fillBtn.addEventListener("click", fillCanvas);
-}
 
 Array.from(colors).forEach((color) => {
   color.addEventListener("click", selectColor);
@@ -109,3 +103,34 @@ export const handleBeganPath = ({ x, y }) => beginPath(x, y);
 export const handleStrokedPath = ({ x, y, color }) => strokePath(x, y, color);
 export const handleFilled = ({ color }) => fill(color);
 export const handleClear = () => clearCanvas();
+export const disableCanvas = () => {
+  canvas.removeEventListener("mousemove", handleMove);
+  canvas.removeEventListener("mousedown", startPainting);
+  canvas.removeEventListener("mouseup", stopPainting);
+  canvas.removeEventListener("mouseleave", stopPainting);
+  clearBtn.removeEventListener("click", clearTheCanvas);
+  fillBtn.removeEventListener("click", fillCanvas);
+}
+
+const enableCanvas = () => {
+  canvas.addEventListener("mousemove", handleMove);
+  canvas.addEventListener("mousedown", startPainting);
+  canvas.addEventListener("mouseup", stopPainting);
+  canvas.addEventListener("mouseleave", stopPainting);
+  clearBtn.addEventListener("click", clearTheCanvas);
+  fillBtn.addEventListener("click", fillCanvas);
+}
+
+export const hideControls = () =>{
+  controls.style.opacity = 0;
+  selectColors.style.opacity = 0;
+} 
+export const showControls = () =>{
+  controls.style.opacity = 1;
+  selectColors.style.opacity = 1;
+} 
+
+
+if (canvas) {
+  enableCanvas();
+}
