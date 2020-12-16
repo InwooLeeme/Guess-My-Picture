@@ -1,15 +1,30 @@
+// Always listening event in this file.
 import events from "./events";
 
-// Always listening event in this file.
+let sockets = []; // 유저 닉네임,점수,id를 관리하는 배열
 
-const socketController = (socket) => {
+const socketController = (socket, io) => {
+  // 방금 들어온 사용자를 제외한 모두에게 broadcast를 함.
   const broadcast = (event, data) => socket.broadcast.emit(event, data);
+  // 모두에게 broadcast를 함.
+  const superBroadcast = (event, data) => io.emit(event, data);
+  // 중복 제거를 위해 함수화.
+  // Server쪽에서 playerUpdate event를 송신. => sockets.js에서 수신
+  const sendPlayerUpdate = () =>
+    superBroadcast(events.playerUpdate, { sockets });
+
   socket.on(events.setNickname, ({ nickname }) => {
     socket.nickname = nickname;
+    // 닉네임을 설정할 때 sockets배열에 자동으로 닉네임, 점수, id값을 추가
+    sockets.push({ id: socket.id, points: 0, nickname: nickname });
     broadcast(events.newUser, { nickname });
+    sendPlayerUpdate();
   });
   socket.on(events.disconnect, () => {
+    // disconnect한 유저를 sockets 배열에서 제거하는 기능
+    sockets = sockets.filter((aSocket) => aSocket.id !== socket.id);
     broadcast(events.disconnected, { nickname: socket.nickname });
+    sendPlayerUpdate();
   });
 
   // sendMsg란 이벤트를 받음

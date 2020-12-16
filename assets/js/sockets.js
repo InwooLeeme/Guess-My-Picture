@@ -9,6 +9,7 @@ import {
   handleFilled,
   handleStrokedPath,
 } from "./paint";
+import { handlePlayerUpdate } from "./players";
 
 let socket = null;
 
@@ -36,4 +37,6 @@ export const initSockets = (aSocket) => {
   aSocket.on(events.filled, handleFilled);
   // cleared event 수신 => handleClear 호출
   aSocket.on(events.cleared, handleClear);
+  // playerUpdate event를 수신 => handlePlayerUpdate 호출
+  aSocket.on(events.playerUpdate, handlePlayerUpdate);
 };

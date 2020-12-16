@@ -15,6 +15,7 @@ const events = {
   filled: "filled",
   clear: "clear",
   cleared: "cleared",
+  playerUpdate: "playerUpdate",
 };
 
 export default events;

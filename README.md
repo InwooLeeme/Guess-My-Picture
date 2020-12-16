@@ -25,6 +25,8 @@ Realtime Drawing game built with SocketIO, GULP and Node
 - [x] Drawing Realtime.
 - [x] Clear the canvas in realTime.
 - [x] Fill the canvas in realTime.
+- [ ] Show the point.
+- [ ] show the user when currently connect.
 
 # Info
 
