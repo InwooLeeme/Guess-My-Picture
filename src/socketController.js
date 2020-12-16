@@ -1,7 +1,12 @@
 // Always listening event in this file.
 import events from "./events";
+import { chooseWord } from "./words";
 
 let sockets = []; // 유저 닉네임,점수,id를 관리하는 배열
+let inProgress = false;
+let word = null;
+
+const chooseLeader = () => sockets[Math.floor(Math.random() * sockets.length)];
 
 const socketController = (socket, io) => {
   // 방금 들어온 사용자를 제외한 모두에게 broadcast를 함.
@@ -13,13 +18,23 @@ const socketController = (socket, io) => {
   const sendPlayerUpdate = () =>
     superBroadcast(events.playerUpdate, { sockets });
 
+  const startGame = () => {
+    if (inProgress === false) {
+      inProgress = true;
+      const painter = chooseLeader();
+      word = chooseWord();
+    }
+  };
+
   socket.on(events.setNickname, ({ nickname }) => {
     socket.nickname = nickname;
     // 닉네임을 설정할 때 sockets배열에 자동으로 닉네임, 점수, id값을 추가
     sockets.push({ id: socket.id, points: 0, nickname: nickname });
     broadcast(events.newUser, { nickname });
     sendPlayerUpdate();
+    startGame();
   });
+
   socket.on(events.disconnect, () => {
     // disconnect한 유저를 sockets 배열에서 제거하는 기능
     sockets = sockets.filter((aSocket) => aSocket.id !== socket.id);
