@@ -5,6 +5,7 @@ import { chooseWords } from "./words";
 let sockets = []; // 유저 닉네임,점수,id를 관리하는 배열
 let inProgress = false;
 let word = null;
+let painter = null;
 
 const chooseLeader = () => sockets[Math.floor(Math.random() * sockets.length)];
 
@@ -21,14 +22,19 @@ const socketController = (socket, io) => {
   const startGame = () => {
     if (inProgress === false) {
       inProgress = true;
-      const painter = chooseLeader();
+      painter = chooseLeader();
       word = chooseWords();
-      io.to(painter.id).emit(events.painterNotif, { word }); // painter로 지정된 사람에게만 메세지 전송
-      superBroadcast(events.gameStarted);
+      setTimeout(() => {
+        superBroadcast(events.gameStarted);
+        io.to(painter.id).emit(events.painterNotif, { word }); // painter로 지정된 사람에게만 메세지 전송
+      }, 2000);
     }
   };
 
-const endGame = () => inProgress = false;
+  const endGame = () => {
+    inProgress = false;
+    superBroadcast(events.gameEnded);
+  };
 
   socket.on(events.setNickname, ({ nickname }) => {
     socket.nickname = nickname;
@@ -36,15 +42,18 @@ const endGame = () => inProgress = false;
     sockets.push({ id: socket.id, points: 0, nickname: nickname });
     broadcast(events.newUser, { nickname });
     sendPlayerUpdate();
-    if(sockets.length === 2){
+    if (sockets.length === 2) {
       startGame();
-    };
+    }
   });
 
   socket.on(events.disconnect, () => {
     // disconnect한 유저를 sockets 배열에서 제거하는 기능
     sockets = sockets.filter((aSocket) => aSocket.id !== socket.id);
-    if(sockets.length === 1){
+    if (sockets.length === 1) {
+      endGame();
+    }
+    else if(socket.id === painter.id){
       endGame();
     }
     broadcast(events.disconnected, { nickname: socket.nickname });

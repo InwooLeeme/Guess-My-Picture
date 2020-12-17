@@ -3,7 +3,7 @@
 import { getSocket } from "./sockets";
 const canvas = document.getElementById("jsCanvas");
 const controls = document.getElementById("jsControls");
-const selectColors = document.getElementById('jsColors')
+const selectColors = document.getElementById("jsColors");
 const fillBtn = document.querySelector("#jsMode:nth-child(1)");
 const clearBtn = document.querySelector("#jsMode:nth-child(2)");
 const colors = document.getElementsByClassName("color");
@@ -94,7 +94,6 @@ function selectColor(event) {
   ctx.fillStyle = getBackgroundColor;
 }
 
-
 Array.from(colors).forEach((color) => {
   color.addEventListener("click", selectColor);
 });
@@ -110,27 +109,29 @@ export const disableCanvas = () => {
   canvas.removeEventListener("mouseleave", stopPainting);
   clearBtn.removeEventListener("click", clearTheCanvas);
   fillBtn.removeEventListener("click", fillCanvas);
-}
+};
 
-const enableCanvas = () => {
+export const enableCanvas = () => {
   canvas.addEventListener("mousemove", handleMove);
   canvas.addEventListener("mousedown", startPainting);
   canvas.addEventListener("mouseup", stopPainting);
   canvas.addEventListener("mouseleave", stopPainting);
   clearBtn.addEventListener("click", clearTheCanvas);
   fillBtn.addEventListener("click", fillCanvas);
-}
+};
 
-export const hideControls = () =>{
+export const hideControls = () => {
   controls.style.opacity = 0;
   selectColors.style.opacity = 0;
-} 
-export const showControls = () =>{
+};
+export const showControls = () => {
   controls.style.opacity = 1;
   selectColors.style.opacity = 1;
-} 
+};
 
+export const resetCanvas = () => fill("#fff");
 
 if (canvas) {
-  enableCanvas();
+  // default
+  hideControls();
 }
