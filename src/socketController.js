@@ -6,6 +6,7 @@ let sockets = []; // 유저 닉네임,점수,id를 관리하는 배열
 let inProgress = false;
 let word = null;
 let painter = null;
+let timeout = null;
 
 const chooseLeader = () => sockets[Math.floor(Math.random() * sockets.length)];
 
@@ -20,21 +21,30 @@ const socketController = (socket, io) => {
     superBroadcast(events.playerUpdate, { sockets });
 
   const startGame = () => {
-    if (inProgress === false) {
-      inProgress = true;
-      painter = chooseLeader();
-      word = chooseWords();
-      superBroadcast(events.gameStarting);
-      setTimeout(() => {
-        superBroadcast(events.gameStarted);
-        io.to(painter.id).emit(events.painterNotif, { word }); // painter로 지정된 사람에게만 메세지 전송
-      }, 3000);
+    if (sockets.length > 1) {
+      if (inProgress === false) {
+        inProgress = true;
+        painter = chooseLeader();
+        word = chooseWords();
+        superBroadcast(events.gameStarting);
+        setTimeout(() => {
+          superBroadcast(events.gameStarted);
+          io.to(painter.id).emit(events.painterNotif, { word }); // painter로 지정된 사람에게만 메세지 전송
+          timeout = setTimeout(endGame, 30000);
+        }, 3000);
+        }
     }
   };
 
   const endGame = () => {
     inProgress = false;
     superBroadcast(events.gameEnded);
+    // timeout이 있을경우 clear
+    if (timeout !== null) {
+      clearTimeout(timeout);
+    }
+    // 2초후 재시작
+    setTimeout(() => startGame(), 2000);
   };
   
   // 점수 측정 함수
@@ -47,6 +57,7 @@ const socketController = (socket, io) => {
     });
     sendPlayerUpdate();
     endGame();
+    clearTimeout(timeout); // 타이머 종료
   }
 
   socket.on(events.setNickname, ({ nickname }) => {
@@ -55,9 +66,7 @@ const socketController = (socket, io) => {
     sockets.push({ id: socket.id, points: 0, nickname: nickname });
     broadcast(events.newUser, { nickname });
     sendPlayerUpdate();
-    if (sockets.length === 2) {
-      startGame();
-    }
+    startGame();
   });
 
   socket.on(events.disconnect, () => {

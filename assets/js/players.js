@@ -1,7 +1,7 @@
 // front end part
 // player에 관한 페이지
 
-import { disableChat } from "./chat";
+import { disableChat, enableChat } from "./chat";
 import {
   disableCanvas,
   hideControls,
@@ -35,6 +35,7 @@ export const handleGameStarted = () => {
   disableCanvas();
   // hidden the canvas controls
   hideControls();
+  enableChat();
 };
 
 export const handlePainterNotif = ({ word }) => {
