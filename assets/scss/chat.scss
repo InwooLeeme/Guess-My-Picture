@@ -1,4 +1,6 @@
 .chat {
+  display: flex;
+  flex-direction: column;
   .chat__message {
     width: 50%;
     height: 70%;

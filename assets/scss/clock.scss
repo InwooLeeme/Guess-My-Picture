@@ -1,0 +1,11 @@
+.clock {
+  width: 350px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  color: $greyColor;
+  background-color: #6a89cc;
+  margin-bottom: 2em;
+}

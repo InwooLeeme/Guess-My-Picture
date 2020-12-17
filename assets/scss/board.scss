@@ -1,18 +1,20 @@
 .player__board {
-  width: 350px;
-  height: 65px;
+  width: 400px;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+  row-gap: 0.5em;
+  column-gap: 0.5em;
   span {
     opacity: 0;
-    width: 20em;
-    height: 10px;
     border-radius: 50px;
     box-shadow: 0 3px 36px rgba(23, 55, 87, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
     text-align: center;
     background-color: $black;
     color: $greyColor;
-    padding: 0.75em;
+    padding: 0.25em;
     animation: disappear 1s ease-out forwards;
-    margin: 0 0 1em 1em;
   }
 }
 
