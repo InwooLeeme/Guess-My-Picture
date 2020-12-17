@@ -1,6 +1,7 @@
 // front end part
 // player에 관한 페이지
 
+import { disableChat } from "./chat";
 import {
   disableCanvas,
   hideControls,
@@ -41,6 +42,8 @@ export const handlePainterNotif = ({ word }) => {
   enableCanvas();
   // show the controls
   showControls();
+  // chat disable
+  disableChat();
   notifs.innerHTML = "";
   notifs.innerText = `You are the painter, paint: ${word}`;
 };
@@ -51,3 +54,6 @@ export const handleGameEnded = () => {
   hideControls();
   resetCanvas();
 }
+
+export const handleGameStarting = () => 
+  setNotification(`Game will start after 3 seconds`);

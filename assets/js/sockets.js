@@ -12,6 +12,7 @@ import {
 import {
   handleGameEnded,
   handleGameStarted,
+  handleGameStarting,
   handlePainterNotif,
   handlePlayerUpdate,
 } from "./players";
@@ -50,4 +51,6 @@ export const initSockets = (aSocket) => {
   aSocket.on(events.painterNotif, handlePainterNotif);
   // gameEnded event를 수신 => handleGameEnded 호출
   aSocket.on(events.gameEnded, handleGameEnded);
+  //
+  aSocket.on(events.gameStarting, handleGameStarting);
 };

@@ -24,10 +24,11 @@ const socketController = (socket, io) => {
       inProgress = true;
       painter = chooseLeader();
       word = chooseWords();
+      superBroadcast(events.gameStarting);
       setTimeout(() => {
         superBroadcast(events.gameStarted);
         io.to(painter.id).emit(events.painterNotif, { word }); // painter로 지정된 사람에게만 메세지 전송
-      }, 2000);
+      }, 3000);
     }
   };
 
@@ -35,6 +36,18 @@ const socketController = (socket, io) => {
     inProgress = false;
     superBroadcast(events.gameEnded);
   };
+  
+  // 점수 측정 함수
+  const addPoints = (id) => {
+    sockets = sockets.map((socket) => {
+      if (socket.id === id) {
+        socket.points += 10;
+      }
+      return socket;
+    });
+    sendPlayerUpdate();
+    endGame();
+  }
 
   socket.on(events.setNickname, ({ nickname }) => {
     socket.nickname = nickname;
@@ -52,8 +65,7 @@ const socketController = (socket, io) => {
     sockets = sockets.filter((aSocket) => aSocket.id !== socket.id);
     if (sockets.length === 1) {
       endGame();
-    }
-    else if(socket.id === painter.id){
+    } else if (socket.id === painter.id) {
       endGame();
     }
     broadcast(events.disconnected, { nickname: socket.nickname });
@@ -62,8 +74,18 @@ const socketController = (socket, io) => {
 
   // sendMsg란 이벤트를 받음
   socket.on(events.sendMsg, ({ message }) => {
-    //보낸 메세지를 가져와서 broadcast함
-    broadcast(events.newMsg, { message, nickname: socket.nickname });
+    // 메세지 가로채기
+    if (message === word) {
+      superBroadcast(events.newMsg, {
+        message: `Winner is ${socket.nickname}, word was: ${word}`,
+        nickname: "Bot",
+      });
+      addPoints(socket.id); // 점수 부여
+    } else {
+      //보낸 메세지를 가져와서 broadcast함
+      // 정답이 아닌 채팅들만 보여줌
+      broadcast(events.newMsg, { message, nickname: socket.nickname });
+    }
   });
   // beginPath 이벤트 수신
   socket.on(events.beginPath, ({ x, y }) => {
