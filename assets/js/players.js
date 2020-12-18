@@ -2,7 +2,7 @@
 // player에 관한 페이지
 
 import { disableChat, enableChat } from "./chat";
-import { startTimer } from "./clock";
+import { clearTimer, startTimer } from "./clock";
 import {
   disableCanvas,
   hideControls,
@@ -56,6 +56,7 @@ export const handleGameEnded = () => {
   disableCanvas();
   hideControls();
   resetCanvas();
+  clearTimer();
 };
 
 export const handleGameStarting = () =>
