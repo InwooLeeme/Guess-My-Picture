@@ -32,7 +32,7 @@ const socketController = (socket, io) => {
           io.to(painter.id).emit(events.painterNotif, { word }); // painter로 지정된 사람에게만 메세지 전송
           timeout = setTimeout(endGame, 30000);
         }, 3000);
-        }
+      }
     }
   };
 
@@ -46,7 +46,7 @@ const socketController = (socket, io) => {
     // 2초후 재시작
     setTimeout(() => startGame(), 2000);
   };
-  
+
   // 점수 측정 함수
   const addPoints = (id) => {
     sockets = sockets.map((socket) => {
@@ -58,7 +58,7 @@ const socketController = (socket, io) => {
     sendPlayerUpdate();
     endGame();
     clearTimeout(timeout); // 타이머 종료
-  }
+  };
 
   socket.on(events.setNickname, ({ nickname }) => {
     socket.nickname = nickname;

@@ -2,6 +2,7 @@
 // Client part
 
 import { handleNewMsg } from "./chat";
+import { controlTimer } from "./clock";
 import { handleDisconnect, handleNewUser } from "./notifications";
 import {
   handleBeganPath,

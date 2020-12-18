@@ -4,3 +4,4 @@ import "./notifications";
 import "./chat";
 import "./paint";
 import "./players";
+import "./clock";
