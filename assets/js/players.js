@@ -2,6 +2,7 @@
 // player에 관한 페이지
 
 import { disableChat, enableChat } from "./chat";
+import { clearTimer, startTimer } from "./clock";
 import {
   disableCanvas,
   hideControls,
@@ -26,7 +27,7 @@ const addPlayers = (players) => {
 const setNotification = (text) => {
   notifs.innerText = "";
   notifs.innerText = text;
-}
+};
 
 export const handlePlayerUpdate = ({ sockets }) => addPlayers(sockets);
 export const handleGameStarted = () => {
@@ -36,6 +37,7 @@ export const handleGameStarted = () => {
   // hidden the canvas controls
   hideControls();
   enableChat();
+  startTimer();
 };
 
 export const handlePainterNotif = ({ word }) => {
@@ -54,7 +56,8 @@ export const handleGameEnded = () => {
   disableCanvas();
   hideControls();
   resetCanvas();
-}
+  clearTimer();
+};
 
-export const handleGameStarting = () => 
+export const handleGameStarting = () =>
   setNotification(`Game will start after 3 seconds`);
