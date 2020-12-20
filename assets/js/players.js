@@ -14,14 +14,45 @@ import {
 const board = document.getElementById("jsPBoard");
 const notifs = document.getElementById("jsNotifs");
 
+let number;
+let randNumber;
+const colors = [
+  "#1abc9c",
+  "#16a085",
+  "#f1c40f",
+  "#f39c12",
+  "#2ecc71",
+  "#27ae60",
+  "#d35400",
+  "#3498db",
+  "#2980b9",
+  "#e74c3c",
+  "#c0392b",
+  "#9b59b6",
+  "#8e44ad",
+  "#ecf0f1",
+  "#bdc3c7",
+  "#34495e",
+  "#2c3e50",
+  "#95a5a6",
+  "#7f8c8d",
+];
+
 const addPlayers = (players) => {
   // 유저가 갱신될 때마다 초기화하고 새로 만들어줌
   board.innerHTML = "";
   players.forEach((player) => {
     const playerElement = document.createElement("span");
     playerElement.innerText = `${player.nickname} : ${player.points}`;
+    randNumber = genRandom();
+    playerElement.style.backgroundColor = colors[randNumber];
     board.appendChild(playerElement);
   });
+};
+
+const genRandom = () => {
+  number = Math.floor(Math.random() * colors.length);
+  return number;
 };
 
 const setNotification = (text) => {
